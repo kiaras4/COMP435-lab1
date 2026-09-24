@@ -8,7 +8,7 @@ uint8_t array[256*4096];
 int temp;
 unsigned char secret = 94;
 /* cache hit time threshold -- you'll need to modify this with what you found in part 1*/
-#define CACHE_HIT_THRESHOLD (80)
+#define CACHE_HIT_THRESHOLD (182)
 #define DELTA 1024
 
 void victim()

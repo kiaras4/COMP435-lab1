@@ -59,7 +59,7 @@ int main() {
 
   // Train the CPU to take the true branch inside victim()
   for (i = 0; i < 10; i++) {   
-      victim(i);
+      victim(i+20);
   }
 
   // Exploit the out-of-order execution
